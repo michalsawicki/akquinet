@@ -8,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Akquinet';
-  posts$;
+  post: any;
+  data;
 
   constructor(private fetchData: FetchDataService) {}
 
   ngOnInit() {
-    this.posts$ = this.fetchData.getData().subscribe(val => console.log(val.posts));
+    this.post = this.fetchData.getData().subscribe(result => {
+      this.data = result.posts;
+      console.log(this.data);
+    });
+
   }
+
 }
