@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class FetchDataService {
   response;
-  postsUrl = 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=1';
+  postsUrl = 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=5';
 
   constructor(private http: HttpClient) { }
 
