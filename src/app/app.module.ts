@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { FetchDataService } from './services/fetch-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,15 +7,21 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot([
+      { path: '', component: PostsComponent },
+      { path: 'posts/:postId', component: PostDetailsComponent }
+    ]),
     HttpClientModule
   ],
   providers: [FetchDataService],
