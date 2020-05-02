@@ -1,4 +1,6 @@
+import { FetchDataService } from './../../services/fetch-data.service';
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-post-details',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
+  title = 'details';
+  post;
+  constructor(private fetchData: FetchDataService,
+              private shared: SharedService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(){
+    this.post = this.shared.getPost();
   }
 
 }

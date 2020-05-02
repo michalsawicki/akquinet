@@ -1,6 +1,8 @@
 <div>
   <p *ngFor="let item of data, index as postId">
-    <a [routerLink]="['/posts', postId]">{{ item.title }}
+    <a [routerLink]="['/posts', postId]" (click)="postData(item)">{{ item.title }}
     </a>
   </p>
 </div>
+
+

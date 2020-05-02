@@ -1,5 +1,6 @@
 import { FetchDataService } from './../../services/fetch-data.service';
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-posts',
@@ -7,29 +8,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  title = 'Akquinet';
   posts: any;
-  data;
+  data: any;
   comments: any;
-  comment;
-  meta;
-  url;
-  postId;
+  url: string;
+  value: any;
 
 
-  constructor(private fetchData: FetchDataService) { }
+  constructor(private fetchData: FetchDataService,
+              private shared: SharedService) { }
 
   ngOnInit() {
     this.posts = this.fetchData.getData().subscribe(result => {
       this.data = result.posts;
-      // console.log(this.data);
-      for(const replies of this.data) {
+      for (const replies of this.data) {
         this.url = replies.meta.links.replies;
-        this.fetchData.getComments(this.url).subscribe(val => {
-          this.comments = val;
-          console.log(this.comments.comments);
-        })
+        this.fetchData.getComments(this.url).subscribe(value => {
+          this.comments = value;
+        });
       }
     });
+}
+
+postData(value) {
+  this.value = value;
+  this.shared.setPost(value);
 }
 }
