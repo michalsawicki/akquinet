@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Posts } from './../interfaces/posts';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,11 +8,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FetchDataService {
-  postsUrl = 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=2';
+  postsUrl = 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=1';
   constructor(private http: HttpClient) { }
 
-  getData() {
-    return this.http.get<Posts>(this.postsUrl);
+  getData(): Observable<Posts[]> {
+    return this.http.get<Posts[]>(this.postsUrl);
   }
 
   getComments(url: string) {

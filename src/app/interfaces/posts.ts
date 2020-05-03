@@ -1,8 +1,9 @@
 export interface Posts {
-  found: number;
-  posts: object;
+    // found: number;
+    // posts: [{
+    //   ID: number;
+    //   title: string;
+    //   content: string;
+    // }]
 }
 
-interface Comments extends Posts {
-  comments: object;
-}
