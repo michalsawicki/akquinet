@@ -6,6 +6,6 @@
   <div [innerHtml]="post.content"></div>
 </ng-container>
 
-<h5>Comments</h5>
+<h5 *ngIf="post">Comments</h5>
 <div *ngFor="let comment of comments" [innerHtml]="comment.content"></div>
 
