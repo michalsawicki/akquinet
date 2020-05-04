@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit, OnDestroy {
+  p: any= [];
   posts: any;
   data;
   data$;

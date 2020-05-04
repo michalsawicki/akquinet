@@ -1,6 +1,7 @@
 <div>
-  <p *ngFor="let item of (data$ | async), index as postId">
+  <p *ngFor="let item of (data$ | async) | paginate: { itemsPerPage: 10, currentPage: p }; index as postId " >
     <a [routerLink]="['/posts', postId]" (click)="postData(item)">{{ item.title }}
     </a>
   </p>
 </div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

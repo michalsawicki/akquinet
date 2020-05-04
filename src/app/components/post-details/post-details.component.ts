@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { FetchDataService } from './../../services/fetch-data.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SharedService } from 'src/app/services/shared.service';
+import { SharedService } from '../../services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
