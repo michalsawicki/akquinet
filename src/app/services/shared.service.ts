@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { FetchDataService } from './fetch-data.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,25 +7,22 @@ import { Injectable } from '@angular/core';
 })
 export class SharedService {
   post;
-  value;
+  posts$;
+  data: BehaviorSubject<any> = new BehaviorSubject(null);
+  url;
   comments;
-  siteID;
-  ID;
-  commentsUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private fetchData: FetchDataService) {
+
+    this.posts$ = this.fetchData.getData().subscribe(result => {
+      this.data.next(result.posts);
+    });
+  }
 
   setPost(value) {
     this.post = value;
-    return value;
   }
 
   getPost() {
-    this.value = this.setPost(this.post);
-    console.log(this.value);
-    this.siteID = this.value.site_ID;
-    this.ID = this.value.ID;
-    this.commentsUrl = `https://public-api.wordpress.com/rest/v1.1/sites/${this.siteID}/posts/${this.ID}/replies/`;
-    this.comments = this.http.get(this.comments);
-    return this.value;
+    return this.post;
   }
 }

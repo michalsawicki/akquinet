@@ -1,41 +1,39 @@
-import { Posts } from './../../interfaces/posts';
-import { FetchDataService } from './../../services/fetch-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
-  // public data: Posts[];
-  posts: Posts[];
+export class PostsComponent implements OnInit, OnDestroy {
+  posts: any;
+  data;
+  data$;
+  dataSubscription: Subscription;
   comments: any;
   url: string;
   value: any;
 
 
-  constructor(private fetchData: FetchDataService,
-              private shared: SharedService) { }
+  constructor(
+    private shared: SharedService
+    ) {}
 
   ngOnInit() {
-    this.fetchData.getData().subscribe(response => {
-      this.posts = response;
-      console.log(this.posts);
-
-      // for (const replies of this.data) {
-      //   this.url = replies.meta.links.replies;
-      //   this.fetchData.getComments(this.url).subscribe(value => {
-      //     this.comments = value;
-      //   });
-      // }
+    this.dataSubscription = this.shared.data.subscribe((data) => {
+      this.data = data;
     });
+    this.data$ = this.shared.data;
+  }
 
-}
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
+  }
 
-postData(value) {
-  // this.value = value;
-  // this.shared.setPost(value);
-}
+  postData(value) {
+    this.value = value;
+    this.shared.setPost(value);
+  }
 }

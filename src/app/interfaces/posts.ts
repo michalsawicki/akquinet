@@ -1,9 +1,14 @@
-export interface Posts {
-    // found: number;
-    // posts: [{
-    //   ID: number;
-    //   title: string;
-    //   content: string;
-    // }]
+export interface Post {
+  ID: number;
+  URL: string;
+  content: string;
+  meta: { links: string }
 }
 
+interface Comments extends Post {
+  comments: object;
+}
+
+export interface HttpData {
+  posts: Post[];
+}

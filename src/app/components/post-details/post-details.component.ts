@@ -1,31 +1,54 @@
-import { ActivatedRoute } from '@angular/router';
-import { Posts } from './../../interfaces/posts';
+import { Subscription } from 'rxjs';
 import { FetchDataService } from './../../services/fetch-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.css']
 })
-export class PostDetailsComponent implements OnInit {
-  info = 'details';
+export class PostDetailsComponent implements OnInit, OnDestroy {
+  title = 'details';
+  postId;
+  dataSubscribe: Subscription;
+  commentsSub: Subscription;
   post;
-  posts: Posts[];
+  content;
+  comments$;
   comments;
-  constructor(private fetchData: FetchDataService,
-              private shared: SharedService,
-              private route: ActivatedRoute) { }
+
+  constructor(
+    private fetchData: FetchDataService,
+    private shared: SharedService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
-    // this.post = this.shared.getPost();
-    // console.log(this.post);
-    this.route.paramMap.subscribe(params => {
-      this.post = this.posts[+params.get('postId')];
-    }
-    );
+    this.getId();
+    this.dataSubscribe = this.shared.data.subscribe(posts => {
+      if (posts) {
+        if (posts.length > this.postId) {
+          this.post = posts[this.postId];
+          this.content =  this.post.content;
+          this.commentsSub = this.fetchData.getComments(this.post.meta.links.replies)
+          .subscribe( (data: any) => this.comments = data.comments);
 
+        } else {
+          this.post = { title: 'Post does not exist' };
+        }
+      }
+    });
+  }
+
+  getId(): void {
+    this.postId = +this.route.snapshot.paramMap.get('postId');
+  }
+
+  ngOnDestroy() {
+    this.dataSubscribe.unsubscribe();
+    this.commentsSub.unsubscribe();
   }
 
 }

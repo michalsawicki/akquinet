@@ -1,3 +1,4 @@
+import { SharedService } from 'src/app/services/shared.service';
 import { RouterModule } from '@angular/router';
 import { FetchDataService } from './services/fetch-data.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,7 +25,7 @@ import { PostsComponent } from './components/posts/posts.component';
     ]),
     HttpClientModule
   ],
-  providers: [FetchDataService],
+  providers: [FetchDataService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

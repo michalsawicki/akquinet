@@ -1,8 +1,6 @@
-<div *ngIf="posts">
-  <p *ngFor="let item of posts.posts, index as postId">
-    <a [routerLink]="['/posts', postId]">{{ item.title }}
+<div>
+  <p *ngFor="let item of (data$ | async), index as postId">
+    <a [routerLink]="['/posts', postId]" (click)="postData(item)">{{ item.title }}
     </a>
   </p>
 </div>
-
-

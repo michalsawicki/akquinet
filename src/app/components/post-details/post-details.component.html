@@ -1,5 +1,11 @@
 <a routerLink="/">Go Back</a>
-<p> {{ info }}</p>
-<!-- <h4> {{ item.title }} </h4> -->
 
-<!-- <div [innerHtml]="post.content"></div> -->
+<ng-container *ngIf="post">
+  <h4> {{ post.title }} </h4>
+  <h4> {{ post.meta.links.replies | json }} </h4>
+  <div [innerHtml]="post.content"></div>
+</ng-container>
+
+<h5>Comments</h5>
+<div *ngFor="let comment of comments" [innerHtml]="comment.content"></div>
+
