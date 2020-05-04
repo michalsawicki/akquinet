@@ -20,7 +20,8 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   constructor(
     private shared: SharedService
-    ) {}
+    ) {
+    }
 
   ngOnInit() {
     this.dataSubscription = this.shared.data.subscribe((data) => { // subscribes for data from shared service to display in template

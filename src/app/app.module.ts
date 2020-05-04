@@ -17,8 +17,7 @@ import { BackToTopComponent } from './components/back-to-top/back-to-top.compone
     AppComponent,
     PostDetailsComponent,
     PostsComponent,
-    BackToTopComponent
-  ],
+    BackToTopComponent  ],
   imports: [
     BrowserModule,
     NgxPaginationModule,
