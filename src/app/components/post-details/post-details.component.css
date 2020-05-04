@@ -1,0 +1,8 @@
+.post-comment {
+  padding: 15px 5px;
+  box-shadow: 1px #000000;
+}
+
+body > figure > img {
+  width: 100%;
+}

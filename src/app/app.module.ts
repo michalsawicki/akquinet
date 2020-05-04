@@ -10,12 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostDetailsComponent,
-    PostsComponent
+    PostsComponent,
+    BackToTopComponent
   ],
   imports: [
     BrowserModule,

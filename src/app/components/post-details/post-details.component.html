@@ -1,11 +1,24 @@
-<a routerLink="/">Go Back</a>
-
-<ng-container *ngIf="post">
-  <h4> {{ post.title }} </h4>
-  <div [innerHtml]="post.content"></div>
-  <h5>Comments</h5>
-<div *ngFor="let comment of comments" [innerHtml]="comment.content"></div>
-</ng-container>
-
-
-
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <a routerLink="/">
+        <button type="button" class="btn btn-light">Go back</button>
+    </a>
+    <ng-container *ngIf="post">
+        <h4 [innerHTML]="post.title">
+        </h4>
+        <div [innerHTML]="post.content"></div>
+        <h6 class="display-4">Comments</h6>
+        <div class="post-comment" *ngFor="let comment of comments">
+            <span class="text-muted">Author:
+                {{comment.author.name }}
+            </span>
+            <br>
+                <span class="text-muted">{{comment.date | date :'short' }}</span>
+                <p [innerHtml]="comment.content"></p>
+        </div>
+    </ng-container>
+    </div>
+  </div>
+</div>
+<app-back-to-top></app-back-to-top>

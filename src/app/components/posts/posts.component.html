@@ -1,4 +1,4 @@
-<table class="table posts-table table-responsive-sm">
+<table class="table posts-table table-responsive-sm table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -8,8 +8,9 @@
   <tbody>
     <tr *ngFor="let item of (data$ | async) | paginate: { itemsPerPage: 10, currentPage: p }; index as postId ">
       <th scope="row">{{ (p - 1) * 10 + postId +1  }}</th>
-      <td> <a [routerLink]="['/posts', postId]" (click)="postData(item)">{{ item.title }}
+      <td> <a [routerLink]="['/posts', postId]" (click)="postData(item)" [innerHTML]="item.title">
           </a>
+          <span class="post-excerpt text-muted" [innerHTML]="item.excerpt"></span>
       </td>
     </tr>
   </tbody>

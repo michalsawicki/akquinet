@@ -3,6 +3,7 @@ import { FetchDataService } from './../../services/fetch-data.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { ActivatedRoute } from '@angular/router';
+import { Pipe } from '@angular/core';
 
 @Component({
   selector: 'app-post-details',
