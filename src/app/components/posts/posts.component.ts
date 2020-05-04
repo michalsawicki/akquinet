@@ -23,7 +23,7 @@ export class PostsComponent implements OnInit, OnDestroy {
     ) {}
 
   ngOnInit() {
-    this.dataSubscription = this.shared.data.subscribe((data) => {
+    this.dataSubscription = this.shared.data.subscribe((data) => { // subscribes for data from shared service to display in template
       this.data = data;
     });
     this.data$ = this.shared.data;
@@ -34,6 +34,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   postData(value) {
+    // passes value of clicked object and passes to setPost method in shared service, value returns object
     this.value = value;
     this.shared.setPost(value);
   }

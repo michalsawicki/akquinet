@@ -10,10 +10,13 @@ import { environment } from 'src/environments/environment';
 export class FetchDataService {
   constructor(private http: HttpClient) { }
 
+
+  // get data from api, url in enviroment.ts and prod.ts
   getData() {
     return this.http.get<HttpData>(environment.postsUrl);
   }
 
+  // gets specific link to comments and gets comments
   getComments(url: string) {
     return this.http.get(url);
   }
