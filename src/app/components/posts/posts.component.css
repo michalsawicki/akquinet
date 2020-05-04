@@ -1,0 +1,8 @@
+.posts-container {
+  min-height: 80vh;
+}
+
+.posts-table {
+  width: 80%;
+  margin: auto;
+}

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  postsUrl: 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=15'
+  postsUrl: 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=30'
 };
 
 /*

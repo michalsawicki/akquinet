@@ -1,7 +1,19 @@
-<div>
-  <p *ngFor="let item of (data$ | async) | paginate: { itemsPerPage: 10, currentPage: p }; index as postId " >
-    <a [routerLink]="['/posts', postId]" (click)="postData(item)">{{ item.title }}
-    </a>
-  </p>
+<table class="table posts-table table-responsive-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of (data$ | async) | paginate: { itemsPerPage: 10, currentPage: p }; index as postId ">
+      <th scope="row">{{ (p - 1) * 10 + postId +1  }}</th>
+      <td> <a [routerLink]="['/posts', postId]" (click)="postData(item)">{{ item.title }}
+          </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="paginator d-flex justify-content-end align-items-end">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
