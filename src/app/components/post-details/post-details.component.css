@@ -1,9 +1,18 @@
+.go-back-button {
+  margin: 15px 0;
+}
+
 .header-image{
   padding: 0;
 }
 
 .post-author {
   font-size: 10px;
+}
+
+.post-comment-author,
+.post-comment-date {
+  font-size: 12px;
 }
 
 .post-content {

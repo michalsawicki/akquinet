@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-10 offset-sm-1">
       <a routerLink="/">
-        <button type="button" class="btn btn-light">Go back</button>
+        <button type="button" class="btn btn-light go-back-button">Go back</button>
     </a>
     <ng-container *ngIf="!postData">
       <div *ngIf="!postData" class="d-flex justify-content-center align-items-center loading-spinner ">
@@ -20,11 +20,11 @@
         <div class="post-content" [innerHTML]="postData.content"></div>
         <h6 *ngIf="postData" class="display-4">Comments</h6>
         <div class="post-comment" *ngFor="let comment of comments">
-            <span class="text-muted">Author:
+            <span class="post-comment-author text-muted">Author:
                 {{comment.author.name }}
             </span>
             <br>
-                <span class="text-muted">{{comment.date | date :'short' }}</span>
+                <span class="post-comment-date text-muted">{{comment.date | date :'short' }}</span>
                 <p [innerHtml]="comment.content"></p>
         </div>
     </ng-container>
