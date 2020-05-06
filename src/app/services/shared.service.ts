@@ -11,6 +11,7 @@ export class SharedService {
   data: BehaviorSubject<any> = new BehaviorSubject(null); // holds the value that needs to be shared with other components
   url;
   comments;
+  postId;
 
 
   constructor(private fetchData: FetchDataService) {

@@ -1,10 +1,10 @@
-<div *ngIf="!this.data" class="d-flex justify-content-center align-items-center loading-spinner ">
+<div *ngIf="!(data$ | async)" class="d-flex justify-content-center align-items-center loading-spinner ">
   <div class="spinner-border" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
 
-<table *ngIf="this.data" class="table posts-table table-responsive-sm table-hover">
+<table *ngIf="(data$ | async)" class="table posts-table table-responsive-sm table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -13,14 +13,14 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of (data$ | async) | paginate: { itemsPerPage: 10, currentPage: p }; index as postId ">
-      <th scope="row">{{ (p - 1) * 10 + postId +1  }}</th>
-      <td> <a [routerLink]="['/posts', postId]" (click)="postData(item)" [innerHTML]="item.title">
+      <td scope="row">{{ (p - 1) * 10 + postId + 1 }}</td>
+      <td> <a [routerLink]="['/posts', (p - 1) * 10 + postId + 1]" (click)="postData(item)" [innerHTML]="item.title">
           </a>
           <span class="post-excerpt text-muted" [innerHTML]="item.excerpt"></span>
       </td>
     </tr>
   </tbody>
 </table>
-<div *ngIf="this.data" class="paginator d-flex justify-content-end align-items-end">
+<div *ngIf="(data$ | async)" class="paginator d-flex justify-content-end align-items-end">
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

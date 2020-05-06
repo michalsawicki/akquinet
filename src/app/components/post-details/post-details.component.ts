@@ -11,13 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostDetailsComponent implements OnInit, OnDestroy {
   title = 'details';
+
   postId;
-  dataSubscribe: Subscription;
-  commentsSub: Subscription;
-  post;
+  postData;
   content;
-  comments$;
   comments;
+
+  dataSub$: Subscription;
+  commentsSub$: Subscription;
 
   constructor(
     private fetchData: FetchDataService,
@@ -28,33 +29,37 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
   // gets data from shared service from data variable
   ngOnInit() {
-    this.getId(); // get id of post
-    this.dataSubscribe = this.shared.data.subscribe(posts => {
+    this.getId();
+    this.getData();
+  }
+
+  getData(): void {
+    this.dataSub$ = this.shared.data.subscribe(posts => {
       if (posts) {
         // retrieve posts from recieved object and checks if posts exist in object
-        if (posts.length > this.postId) { // if exists sets post id, content and comments to variable
-          this.post = posts[this.postId];
-          this.content =  this.post.content;
-          this.commentsSub = this.fetchData.getComments(this.post.meta.links.replies)
-          // comments are taken from returned object API url and is passed to getComments method
-          // in fetch-data service to get response from http
-          .subscribe( (data: any) => this.comments = data.comments);
-
+        if (posts.length > this.postId + 1) { // if exists sets post id, content and comments to variable
+          this.postData = posts[this.postId];
+          this.content =  this.postData.content;
+          this.getComments();
         } else {
-          this.post = { title: 'Post does not exist' };
-          // if there is no post return response in html post-detail component
+          this.postData = { title: 'Post does not exist' };
         }
       }
     });
   }
 
+  getComments() {
+    this.commentsSub$ = this.fetchData.getComments(this.postData.meta.links.replies)
+      .subscribe( (data: any) => this.comments = data.comments);
+  }
+
   getId(): void {
-    this.postId = +this.route.snapshot.paramMap.get('postId');
+    this.postId = +this.route.snapshot.paramMap.get('postId') - 1;
   }
 
   ngOnDestroy() {
-    this.dataSubscribe.unsubscribe();
-    this.commentsSub.unsubscribe();
+    this.dataSub$.unsubscribe();
+    this.commentsSub$.unsubscribe();
   }
 
 }

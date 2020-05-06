@@ -4,17 +4,17 @@
       <a routerLink="/">
         <button type="button" class="btn btn-light">Go back</button>
     </a>
-    <ng-container *ngIf="!post">
-      <div *ngIf="!post" class="d-flex justify-content-center align-items-center loading-spinner ">
+    <ng-container *ngIf="!postData">
+      <div *ngIf="!postData" class="d-flex justify-content-center align-items-center loading-spinner ">
       <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div></ng-container>
-    <ng-container *ngIf="post">
-        <h4 [innerHTML]="post.title">
+    <ng-container *ngIf="postData">
+        <h4 [innerHTML]="postData.title">
         </h4>
-        <div [innerHTML]="post.content"></div>
-        <h6 *ngIf="post" class="display-4">Comments</h6>
+        <div [innerHTML]="postData.content"></div>
+        <h6 *ngIf="postData" class="display-4">Comments</h6>
         <div class="post-comment" *ngFor="let comment of comments">
             <span class="text-muted">Author:
                 {{comment.author.name }}
