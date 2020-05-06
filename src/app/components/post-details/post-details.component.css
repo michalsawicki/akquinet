@@ -1,3 +1,15 @@
+.header-image{
+  padding: 0;
+}
+
+.post-author {
+  font-size: 10px;
+}
+
+.post-content {
+  text-align: justify;
+}
+
 .post-comment {
   padding: 15px 5px;
   box-shadow: 1px #000000;

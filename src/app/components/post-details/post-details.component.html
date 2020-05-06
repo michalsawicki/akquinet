@@ -11,9 +11,13 @@
       </div>
     </div></ng-container>
     <ng-container *ngIf="postData">
+      <div class="container-fluid header-image">
+        <img src="{{ postData.featured_image }}" alt="" srcset="">
+      </div>
+      <span class="text-muted post-author"> {{ postData.author.name }} {{ postData.date | date: 'short' }} </span>
         <h4 [innerHTML]="postData.title">
         </h4>
-        <div [innerHTML]="postData.content"></div>
+        <div class="post-content" [innerHTML]="postData.content"></div>
         <h6 *ngIf="postData" class="display-4">Comments</h6>
         <div class="post-comment" *ngFor="let comment of comments">
             <span class="text-muted">Author:
