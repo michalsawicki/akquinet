@@ -1,4 +1,4 @@
-# Akquinet
+# Wordpress Posts
 
 Author: Michał Sawicki
 Created: Apr/May '20
@@ -11,7 +11,7 @@ User can browse post list by title and navigate through pagination and go to eac
 Application runs on development server.
 To use this app clone respository to Your computer using
 ```
-git clone git@github.com:michalsawicki/akquinet.git
+git clone git@github.com:michalsawicki/wordpress-api-posts-angular.git
 ```
 and run
 ```
